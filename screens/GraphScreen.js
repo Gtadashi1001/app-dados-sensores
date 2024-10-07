@@ -1,126 +1,103 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Picker } from 'react-native';
-import { Line, Bar } from 'react-chartjs-2';
-import 'chart.js/auto';
+let token = null; // Variável para armazenar o token JWT
 
-export default function GraphScreen({ route }) {
-  const [sensorData, setSensorData] = useState([]);
-  const [chartType, setChartType] = useState('line');
-  const [timeRange, setTimeRange] = useState('lastHour'); // Novo estado para intervalo de tempo
-  const { token } = route.params;
+const sensors = [
+  { sensor_id: 1, room: 'Cozinha', countdown: 60, lastTemperature: null },
+  { sensor_id: 2, room: 'Sala', countdown: 60, lastTemperature: null },
+  { sensor_id: 3, room: 'Quarto', countdown: 60, lastTemperature: null },
+  { sensor_id: 4, room: 'Escritório', countdown: 60, lastTemperature: null },
+];
 
-  useEffect(() => {
-    const fetchSensorData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/dados-sensores', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
-        const filteredData = filterSensorData(data); // Aplicar filtro
-        setSensorData(filteredData);
-      } catch (error) {
-        console.error('Erro ao buscar dados dos sensores:', error);
-      }
-    };
+// Função para simular a temperatura usando dados históricos de São Paulo
+const simulateTemperature = () => {
+  const historicalTemperatures = [22, 23, 24, 25, 26, 27, 28, 29, 30]; // Exemplo de temperaturas históricas
+  const randomIndex = Math.floor(Math.random() * historicalTemperatures.length);
+  return historicalTemperatures[randomIndex]; // Retorna uma temperatura aleatória
+};
 
-    fetchSensorData();
-  }, [token, timeRange]); // Dependência adicionada
+const simulateHumidity = () => {
+  return (Math.random() * 50 + 30).toFixed(2); // Umidade entre 30% e 80%
+};
 
-  const filterSensorData = (data) => {
-    const now = new Date();
-    return data.filter(item => {
-      const itemDate = new Date(item.timestamp);
-      switch (timeRange) {
-        case 'lastHour':
-          return itemDate >= new Date(now - 60 * 60 * 1000);
-        case 'last24Hours':
-          return itemDate >= new Date(now - 24 * 60 * 60 * 1000);
-        case 'lastWeek':
-          return itemDate >= new Date(now - 7 * 24 * 60 * 60 * 1000);
-        case 'last30Days':
-          return itemDate >= new Date(now - 30 * 24 * 60 * 60 * 1000); // Últimos 30 dias
-        default:
-          return true; // Caso padrão (sem filtro)
-      }
+// Função para autenticar e pegar o token JWT
+const authenticate = async (sensor) => {
+  try {
+    const loginResponse = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'monitor',
+        password: '123',
+      }),
     });
-  };
 
-  const data = {
-    labels: sensorData.map(item => new Date(item.timestamp).toLocaleTimeString()),
-    datasets: [
-      {
-        label: 'Temperatura',
-        data: sensorData.map(item => item.temperatura),
-        borderColor: 'rgba(75, 192, 192, 1)',
-        fill: false,
-        tension: 0.1,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Tempo',
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Temperatura (°C)',
-        },
-        beginAtZero: true,
-      },
-    },
-  };
-
-  const renderChart = () => {
-    switch (chartType) {
-      case 'line':
-        return <Line data={data} options={options} />;
-      case 'bar':
-        return <Bar data={data} options={options} />;
-      default:
-        return <Line data={data} options={options} />;
+    if (!loginResponse.ok) {
+      throw new Error('Falha na autenticação');
     }
-  };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Gráfico de Dados dos Sensores</Text>
-      <Picker
-        selectedValue={timeRange}
-        style={styles.picker}
-        onValueChange={(itemValue) => setTimeRange(itemValue)}
-        itemStyle={styles.pickerItem}
-      >
-        <Picker.Item label="Última Hora" value="lastHour" />
-        <Picker.Item label="Últimas 24 Horas" value="last24Hours" />
-        <Picker.Item label="Última Semana" value="lastWeek" />
-        <Picker.Item label="Últimos 30 Dias" value="last30Days" /> {/* Nova opção */}
-      </Picker>
-      <Picker
-        selectedValue={chartType}
-        style={styles.picker}
-        onValueChange={(itemValue) => setChartType(itemValue)}
-        itemStyle={styles.pickerItem}
-      >
-        <Picker.Item label="Linha" value="line" />
-        <Picker.Item label="Barra" value="bar" />
-      </Picker>
-      {renderChart()}
-    </View>
-  );
-}
+    const loginData = await loginResponse.json();
+    token = loginData.token; // Armazena o token JWT para ser usado depois
+    console.log(`Autenticado sensor ${sensor.sensor_id}, token obtido.`);
+  } catch (error) {
+    console.error(`Erro ao autenticar o sensor ${sensor.room}:`, error.message);
+  }
+};
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'flex-start', alignItems: 'flex-end', padding: 20 },
-  title: { fontSize: 18, marginBottom: 10 },
-  picker: { height: 40, width: 150, marginBottom: 20, borderColor: '#ccc', borderWidth: 1, borderRadius: 5 },
-  pickerItem: { height: 40 },
-});
+// Função para enviar dados do sensor para o backend
+const sendData = async (sensor) => {
+  try {
+    if (!token) {
+      await authenticate(sensor); // Autentica se o token não existir
+    }
+
+    const temperatura = simulateTemperature();
+    const umidade = simulateHumidity();
+
+    await fetch('http://localhost:3000/dados-sensores', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // Usa o token no cabeçalho
+      },
+      body: JSON.stringify({
+        sensor_id: sensor.sensor_id,
+        temperatura: temperatura,
+        umidade: umidade,
+      }),
+    });
+
+    // Atualiza a última temperatura medida
+    sensor.lastTemperature = temperatura;
+
+    // Atualiza a interface
+    document.getElementById(`temperatura-${sensor.sensor_id}`).textContent = `${temperatura} °C`;
+    console.log(`Dados enviados do sensor ${sensor.room}: Temperatura = ${temperatura}, Umidade = ${umidade}`);
+  } catch (error) {
+    console.error(`Erro ao enviar dados do sensor ${sensor.room}:`, error.message);
+  }
+};
+
+// Função para atualizar o contador e enviar dados periodicamente
+const updateCountdown = () => {
+  sensors.forEach(sensor => {
+    const countdownElement = document.getElementById(`countdown-${sensor.sensor_id}`);
+
+    if (sensor.countdown > 0) {
+      sensor.countdown--;
+      countdownElement.textContent = `Próximo envio automático em ${sensor.countdown} segundos`;
+    } else {
+      sendData(sensor);
+      sensor.countdown = 60;
+      countdownElement.textContent = `Próximo envio automático em ${sensor.countdown} segundos`;
+    }
+  });
+};
+
+// Função para enviar dados manualmente ao clicar no botão
+const handleSendButtonClick = (sensorId) => {
+  const sensor = sensors.find(s => s.sensor_id === sensorId);
+  sendData(sensor);
+  sensor.countdown = 60;
+  document.getElementById(`countdown-${sensor.sensor_id}`).textContent = `Próximo envio automático em ${sensor.countdown} segundos`;
+};
+
+setInterval(updateCountdown, 1000); // Atualiza o contador a cada 1 segundo
