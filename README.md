@@ -10,7 +10,7 @@
 
 | **$ git clone https://github.com/gabsakura/app-dados-sensores** | 
 
-| **$ cd app-dados-sensores-main** |
+| **$ cd app-dados-sensores** |
 
 ### Então, execute o comando `npm install` para instalar todas as dependências necessárias para utilizar este programa de React Native.
 
