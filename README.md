@@ -1,29 +1,27 @@
-# Ola este é um codigo para visualização de dados utilizando o react native de sensores dentro de seu quarto 
+# Olá! Este é um código para visualização de dados utilizando o React Native de sensores dentro de seu quarto.
 
-## Para se utiliza-lo utilize os seguintes passos:
+## Para utilizá-lo, siga os seguintes passos:
 
-### Primeiramente Você precisará utilizar mais um codigo para que este funcione, que seria o back-end no qual você pode acessar utilizando este link: [Codigo-Backend](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git) (Para utilizar este codigo leia o README dele mesmo)
+### Primeiramente, você precisará utilizar mais um código para que este funcione, que seria o back-end. Você pode acessá-lo utilizando este link: [Código-Backend](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git) (para utilizar este código, leia o README dele mesmo).
 
-### Alem do codigo do back-end você precisara utilizar este outro codigo para postar os dados para se mostrar dentro deste aplicativo de reactive native, para acessar aquele outro codigo clique neste link:    [Codigo-requisição](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git)
+### Além do código do back-end, você precisará utilizar este outro código para postar os dados que serão exibidos dentro deste aplicativo de React Native. Para acessar aquele outro código, clique neste link: [Código-requisição](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git).
 
-### Em seguida faça um fork deste arquivo utilizando os seguintes comandos em sequencia:
+### Em seguida, faça um fork deste arquivo utilizando os seguintes comandos em sequência:
+
 | **$ git clone https://github.com/gabsakura/app-dados-sensores** | 
+
 | **$ cd app-dados-sensores-main** |
 
-### Então realize o comando de *npm install* para instalar todas as dependencias necessarias para se utilizar esse programa de reactive-native.
+### Então, execute o comando `npm install` para instalar todas as dependências necessárias para utilizar este programa de React Native.
 
-### Enfim se você possui o backend rodando e utilizar o comando no terminal *npm start* e apertar o botão "w" quando for requisitado você ira conseguir acessar o site.
+### Enfim, se você possui o back-end rodando, utilize o comando no terminal `npm start` e pressione o botão "w" quando solicitado. Assim, você conseguirá acessar o site.
 
-### Por fim para se utilizar o codigo clicke na aba de *Register* e faça seu registro de conta para se utiliza-lo, e depois faça o *Login* para acessar a aba de graficos. 
-
+### Por fim, para utilizar o código, clique na aba de *Register* e faça seu registro de conta. Depois, faça o *Login* para acessar a aba de gráficos.
 
 Imagens do site:
 
-![LoginScreen](https://github.com/gabsakura/app-dados-sensores/blob/main/images/loginscreen.png)
-LoginScreen
+![Tela de Login](https://github.com/gabsakura/app-dados-sensores/blob/main/images/loginscreen.png)
 
-![LoginScreen](https://github.com/gabsakura/app-dados-sensores/blob/main/images/image.png)
-RegisterScreen
+![Tela de Registro](https://github.com/gabsakura/app-dados-sensores/blob/main/images/image.png)
 
-![LoginScreen](https://github.com/gabsakura/app-dados-sensores/blob/main/images/Graficos.png)
-Imagem dos graficos
+![Imagem dos Gráficos](https://github.com/gabsakura/app-dados-sensores/blob/main/images/Graficos.png)
