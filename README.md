@@ -6,8 +6,8 @@
 
 ### Em seguida faça um fork deste arquivo utilizando os seguintes comandos:                                $ git clone https://github.com/gabsakura/app-dados-sensores                                                $ cd app-dados-sensores-main
 
-### Então realize o comando de **npm install** para instalar todas as dependencias necessarias para se utilizar esse programa de reactive-native.
+### Então realize o comando de *npm install* para instalar todas as dependencias necessarias para se utilizar esse programa de reactive-native.
 
-### Enfim se você possui o backend rodando e utilizar o comando no terminal **npm start** e apertar o botão "w" quando for requisitado você ira conseguir acessar o site.
+### Enfim se você possui o backend rodando e utilizar o comando no terminal *npm start* e apertar o botão "w" quando for requisitado você ira conseguir acessar o site.
 
-### Por fim para se utilizar o codigo clicke na aba de **Register** e faça seu registro de conta para se utiliza-lo, e depois faça o **Login** para acessar a aba de graficos.
+### Por fim para se utilizar o codigo clicke na aba de *Register* e faça seu registro de conta para se utiliza-lo, e depois faça o *Login* para acessar a aba de graficos.
