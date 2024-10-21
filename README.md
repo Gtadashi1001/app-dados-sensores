@@ -4,7 +4,9 @@
 
 ### Primeiramente Você precisará utilizar mais um codigo para que este funcione, que seria o back-end no qual você pode acessar utilizando este link: [Codigo-Backend](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git) (Para utilizar este codigo leia o README dele mesmo)
 
-### Em seguida faça um fork deste arquivo utilizando os seguintes comandos:                                $ git clone https://github.com/gabsakura/app-dados-sensores                                                $ cd app-dados-sensores-main
+### Em seguida faça um fork deste arquivo utilizando os seguintes comandos:
+| **$ git clone https://github.com/gabsakura/app-dados-sensores** | 
+| **$ cd app-dados-sensores-main** |
 
 ### Então realize o comando de *npm install* para instalar todas as dependencias necessarias para se utilizar esse programa de reactive-native.
 
