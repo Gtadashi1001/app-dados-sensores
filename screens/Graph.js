@@ -74,6 +74,10 @@ export default function GraphScreen({ route }) {
                     return itemDate >= new Date(now - 30 * 24 * 60 * 60 * 1000);
                 case 'last60Seconds':
                     return itemDate >= new Date(now - 60 * 1000);
+                case 'last3Months':
+                    return itemDate >= new Date(now - 3 * 30 * 24 * 60 * 60 * 1000);
+                case 'lastYear':
+                    return itemDate >= new Date(now - 365 * 24 * 60 * 60 * 1000);
                 default:
                     return true;
             }
@@ -151,11 +155,13 @@ export default function GraphScreen({ route }) {
                 onValueChange={(itemValue) => setTimeRange(itemValue)}
                 itemStyle={styles.pickerItem}
             >
+                <Picker.Item label="Últimos 60 Segundos" value="last60Seconds" />
                 <Picker.Item label="Última Hora" value="lastHour" />
                 <Picker.Item label="Últimas 24 Horas" value="last24Hours" />
                 <Picker.Item label="Última Semana" value="lastWeek" />
                 <Picker.Item label="Últimos 30 Dias" value="last30Days" />
-                <Picker.Item label="Últimos 60 Segundos" value="last60Seconds" />
+                <Picker.Item label="Últimos 3 meses" value="last3Months" />
+                <Picker.Item label="Último Ano" value="lastYear" />
             </Picker>
 
             <Picker

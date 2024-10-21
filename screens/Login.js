@@ -48,6 +48,9 @@ export default function LoginScreen({ navigation }) {
                 onChangeText={setPassword}
             />
             <Button title="Entrar" onPress={handleLogin} />
+
+            <Text>Não tem cadastro?</Text>
+            <Button title="Registrar" onPress={() => navigation.navigate('RegisterScreen')} />
         </View>
     );
 }
