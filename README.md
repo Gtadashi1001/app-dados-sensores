@@ -4,6 +4,8 @@
 
 ### Primeiramente Você precisará utilizar mais um codigo para que este funcione, que seria o back-end no qual você pode acessar utilizando este link: [Codigo-Backend](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git) (Para utilizar este codigo leia o README dele mesmo)
 
+### Alem do codigo do back-end você precisara utilizar este outro codigo para postar os dados para se mostrar dentro deste aplicativo de reactive native, para acessar aquele outro codigo clique neste link:    [Codigo-requisição](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git)
+
 ### Em seguida faça um fork deste arquivo utilizando os seguintes comandos em sequencia:
 | **$ git clone https://github.com/gabsakura/app-dados-sensores** | 
 | **$ cd app-dados-sensores-main** |
