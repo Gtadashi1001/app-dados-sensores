@@ -4,7 +4,7 @@
 
 ### Primeiramente, você precisará utilizar mais um código para que este funcione, que seria o back-end. Você pode acessá-lo utilizando este link: [Código-Backend](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git) (para utilizar este código, leia o README dele mesmo).
 
-### Além do código do back-end, você precisará utilizar este outro código para postar os dados que serão exibidos dentro deste aplicativo de React Native. Para acessar aquele outro código, clique neste link: [Código-requisição](https://github.com/gabsakura/2emr-backend-IoT-dados-sensores-main.git).
+### Além do código do back-end, você precisará utilizar este outro código para postar os dados que serão exibidos dentro deste aplicativo de React Native. Para acessar aquele outro código, clique neste link: [Código-requisição](https://github.com/gabsakura/Ambiente-Monitorado).
 
 ### Em seguida, faça um fork deste arquivo utilizando os seguintes comandos em sequência:
 
