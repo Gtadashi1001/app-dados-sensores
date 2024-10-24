@@ -25,3 +25,9 @@ Imagens do site:
 ![Tela de Registro](https://github.com/gabsakura/app-dados-sensores/blob/main/images/image.png)
 
 ![Imagem dos Gráficos](https://github.com/gabsakura/app-dados-sensores/blob/main/images/Graficos.png)
+
+
+Integrantes do grupo:
+Nome: Gabriel Tadashi RM: 551722
+Nome: Giulia Henritzi RM: 551160
+Nome: Leonardo Martins RM: 99537
